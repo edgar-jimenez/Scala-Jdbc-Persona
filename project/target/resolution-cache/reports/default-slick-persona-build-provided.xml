@@ -3,18 +3,18 @@
 <ivy-report version="1.0">
 	<info
 		organisation="default"
-		module="jdbc-persona-build"
+		module="slick-persona-build"
 		revision="0.1-SNAPSHOT"
 		extra-scalaVersion="2.10"
 		extra-sbtVersion="0.13"
 		conf="provided"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
-		date="20180618111741"/>
+		date="20180618151635"/>
 	<dependencies>
 		<module organisation="org.scala-sbt" name="sbt">
 			<revision name="0.13.15" status="release" pubdate="20170409161023" resolver="sbt-chain" artresolver="sbt-chain" downloaded="false" searched="false" default="false" conf="compile, default(compile)" position="1">
 				<metadata-artifact status="no" details="" size="1457" time="0" location="C:\Users\edgar.jimenez\.ivy2\cache\org.scala-sbt\sbt\ivy-0.13.15.xml" searched="false" origin-is-local="false" origin-location="https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt/0.13.15/ivys/ivy.xml"/>
-				<caller organisation="default" name="jdbc-persona-build" conf="provided" rev="0.13.15" rev-constraint-default="0.13.15" rev-constraint-dynamic="0.13.15" callerrev="0.1-SNAPSHOT"/>
+				<caller organisation="default" name="slick-persona-build" conf="provided" rev="0.13.15" rev-constraint-default="0.13.15" rev-constraint-dynamic="0.13.15" callerrev="0.1-SNAPSHOT"/>
 				<artifacts>
 					<artifact name="sbt" type="jar" ext="jar" status="no" details="" size="52851" time="0" location="C:\Users\edgar.jimenez\.ivy2\cache\org.scala-sbt\sbt\jars\sbt-0.13.15.jar">
 						<origin-location is-local="false" location="https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt/0.13.15/jars/sbt.jar"/>
@@ -685,8 +685,8 @@
 				<caller organisation="org.scala-sbt" name="run" conf="compile" rev="2.10.6" rev-constraint-default="2.10.6" rev-constraint-dynamic="2.10.6" callerrev="0.13.15"/>
 				<caller organisation="org.scala-sbt" name="sbt" conf="compile" rev="2.10.6" rev-constraint-default="2.10.6" rev-constraint-dynamic="2.10.6" callerrev="0.13.15"/>
 				<caller organisation="org.scala-sbt" name="incremental-compiler" conf="compile" rev="2.10.6" rev-constraint-default="2.10.6" rev-constraint-dynamic="2.10.6" callerrev="0.13.15"/>
-				<caller organisation="default" name="jdbc-persona-build" conf="provided" rev="2.10.6" rev-constraint-default="2.10.6" rev-constraint-dynamic="2.10.6" callerrev="0.1-SNAPSHOT"/>
 				<caller organisation="org.scala-sbt" name="classfile" conf="compile" rev="2.10.6" rev-constraint-default="2.10.6" rev-constraint-dynamic="2.10.6" callerrev="0.13.15"/>
+				<caller organisation="default" name="slick-persona-build" conf="provided" rev="2.10.6" rev-constraint-default="2.10.6" rev-constraint-dynamic="2.10.6" callerrev="0.1-SNAPSHOT"/>
 				<caller organisation="org.scala-sbt" name="serialization_2.10" conf="default, compile, runtime, master" rev="2.10.6" rev-constraint-default="2.10.6" rev-constraint-dynamic="2.10.6" callerrev="0.1.2"/>
 				<caller organisation="org.scala-lang" name="scala-compiler" conf="default, compile, runtime, master" rev="2.10.6" rev-constraint-default="2.10.6" rev-constraint-dynamic="2.10.6" callerrev="2.10.6"/>
 				<caller organisation="org.scala-lang" name="scala-reflect" conf="compile, runtime" rev="2.10.6" rev-constraint-default="2.10.6" rev-constraint-dynamic="2.10.6" callerrev="2.10.6"/>

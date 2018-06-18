@@ -2,6 +2,7 @@ package persistence
 
 import javax.inject.{Inject, Singleton}
 import models.Persona
+import play.api.Logger
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 
@@ -14,20 +15,20 @@ class PersonaRepository @Inject()(protected val dbConfigProvider: DatabaseConfig
 
   import profile.api._
 
-  private val Personas = TableQuery[PersonaTable]
+  private val personaquery = TableQuery[PersonaTable]
 
-  def all() : Future[Seq[Persona]] = db.run(Personas.result)
+  def all() : Future[Seq[Persona]] = db.run(personaquery.result)
 
-  def add(persona: Persona): Future[Unit] = db.run(Personas += persona).map(_ => ())
+  def add(persona: Persona): Future[Unit] = db.run(personaquery += persona).map(_ => ())
 
-  def delete(persona: Persona) : Future[Unit] = {
-    val q = Personas.filter(_.name === persona.nombre)
+  def delete(persona: Persona) : Future[Int] = {
+    val q = personaquery.filter(_.name === persona.nombre)
     val action = q.delete
-    db.run(action).map(_ => ())
+    db.run(action)
   }
 
   def buscarPorNombre(nombre:String) : Future[Seq[Persona]] = {
-    val q = Personas.filter(_.name === nombre)
+    val q = personaquery.filter(_.name === nombre)
     val action = q.result
     db.run(action)
   }

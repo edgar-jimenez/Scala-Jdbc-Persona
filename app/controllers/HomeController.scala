@@ -1,21 +1,22 @@
 package controllers
 
 import javax.inject._
-import models.{ Persona}
-import persistence.{ PersonaRepository}
-import play.api.libs.json.{Json}
+import models.Persona
+import persistence.PersonaRepository
+import play.api.libs.json.Json
 import play.api.mvc._
+import play.api.Logger
+
 
 import scala.concurrent.{ExecutionContext, Future}
 
 
+
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents, personaRepository: PersonaRepository)(implicit executionContext: ExecutionContext)
+class HomeController @Inject()( cc: ControllerComponents, personaRepository: PersonaRepository)(implicit executionContext: ExecutionContext)
   extends AbstractController(cc) {
 
-  populateDate()
-
-  def listarPersonas() = Action.async{ implicit request: Request[AnyContent] =>
+  def listarPersonas() = Action.async{ request: Request[AnyContent] =>
     val fPersonas: Future[Seq[Persona]] = personaRepository.all()
 
     fPersonas.map(s => Ok( Json.toJson(s)))
@@ -29,7 +30,7 @@ class HomeController @Inject()(cc: ControllerComponents, personaRepository: Pers
     deletePersona(request.body)
   }
 
-  def buscar(nombre: String)= Action.async{ implicit request: Request[AnyContent] =>
+  def buscar(nombre: String)= Action.async{ request: Request[AnyContent] =>
     val resultado: Future[Seq[Persona]] = personaRepository.buscarPorNombre(nombre)
     resultado
       .map(s => Ok(Json.toJson(s.headOption.get)))
@@ -42,11 +43,14 @@ class HomeController @Inject()(cc: ControllerComponents, personaRepository: Pers
   }
 
   private def deletePersona(persona: Persona): Future[Result] = {
+
     personaRepository.delete(persona)
-      .map(_ => Ok("Persona Elimino Con Exito"))
+      .map(resultado => {
+        if (resultado>0) Ok("Persona Elimino Con Exito: "+resultado) else NotFound("Persona no Existe")
+      })
       .recoverWith{
         case error: Exception => {
-          error.printStackTrace(System.err)
+          Logger.error(error.toString)
           Future.successful( InternalServerError("no se pudo eliminar a la persona "))
         }
       }
@@ -61,12 +65,6 @@ class HomeController @Inject()(cc: ControllerComponents, personaRepository: Pers
           Future.successful( InternalServerError(s"no se pudo agragr a la persona: $persona"))
         }
       }
-  }
-
-  private def populateDate() {
-    insertPersona(new Persona("Edgar", "Jimenez", 24))
-    insertPersona(new Persona("Andres", "Mangones", 24))
-    insertPersona(new Persona("Juna", "Castillo", 18))
   }
 
 }
